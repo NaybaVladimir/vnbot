@@ -142,4 +142,33 @@ public class SecondaryKeyboard {
         return inlineKeyboardMarkup;
     }
 
+
+
+    public static InlineKeyboardMarkup possibilities() {
+        //Создание клавиатуры
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+
+//Создание кнопок и установка их наименований
+        InlineKeyboardButton humor = new InlineKeyboardButton();
+        humor.setText("Шутка");
+
+
+//Установка id Кнопки
+        humor.setCallbackData("humor");
+
+
+//Создание ряда кнопок
+        List<InlineKeyboardButton> listButton = new ArrayList<>();
+        listButton.add(humor);
+
+//Список списков кнопок
+        List<List<InlineKeyboardButton>> listRow = new ArrayList<>();
+        listRow.add(listButton);
+
+//Помещаем кнопки в клавиатуре
+        inlineKeyboardMarkup.setKeyboard(listRow);
+
+        return inlineKeyboardMarkup;
+    }
+
 }

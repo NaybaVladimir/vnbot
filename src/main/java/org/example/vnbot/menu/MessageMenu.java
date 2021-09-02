@@ -53,11 +53,12 @@ public class MessageMenu {
                     SendMessage workExp = MessageInit.sendMsg(message.getChatId().toString(),
                             new FileRead().txtRead("workExp/workExp"));
                     workExp.setReplyMarkup(SecondaryKeyboard.workExp());
-                    System.out.println(workExp);
                     bot.execute(workExp);
                     break;
                 case "Возможности \uD83C\uDF81":
-                    bot.execute(MessageInit.sendMsg(message.getChatId().toString(), new FileRead().txtRead("possibilities")));
+                    SendMessage possibilities = MessageInit.sendMsg(message.getChatId().toString(), new FileRead().txtRead("possibilities"));
+                    possibilities.setReplyMarkup(SecondaryKeyboard.possibilities());
+                    bot.execute(possibilities);
                     break;
                 case "Ссылки \uD83D\uDEAA":
                     bot.execute(MessageInit.sendMsg(message.getChatId().toString(), new FileRead().txtRead("link")));
@@ -66,7 +67,9 @@ public class MessageMenu {
                     bot.execute(MessageInit.sendMsg(message.getChatId().toString(), new FileRead().txtRead("contacts")));
                     break;
                 case "Шутка":
-                    bot.execute(MessageInit.sendMsg(message.getChatId().toString(), Joke.jokeMain()));
+                    SendMessage humor = MessageInit.sendMsg(message.getChatId().toString(), Joke.jokeMain());
+                    humor.setReplyMarkup(SecondaryKeyboard.possibilities());
+                    bot.execute(humor);
                     break;
                 default:
                     bot.execute(MessageInit.sendMsg(message.getChatId().toString(), "Даже не знаю как с этим работать, передам создателю, он разберется\uD83D\uDE04"));
@@ -135,6 +138,12 @@ public class MessageMenu {
                         new FileRead().txtRead("aboutMe/technologiesMe"));
                 technologiesMe.setReplyMarkup(SecondaryKeyboard.returnBack("О себе \uD83D\uDC82\uD83C\uDFFB\u200D♀️"));
                 bot.execute(technologiesMe);
+                break;
+            case "humor":
+                SendMessage humor = MessageInit.sendMsg(update.getCallbackQuery().getMessage().getChatId().toString(),
+                        Joke.jokeMain());
+                humor.setReplyMarkup(SecondaryKeyboard.possibilities());
+                bot.execute(humor);
                 break;
             default:
                 Message message = update.getCallbackQuery().getMessage();
